@@ -6,9 +6,9 @@ from lists.views import home_page
 class HomePageTest(TestCase):
 	# when we go to url '/' 200 code is sent back
 	def test_root_url_resolves_to_home_page_view(self):
-		found = resolve('/')
+		response = self.client.get(reverse('home_page'))
 
-		self.assertEqual(found.func, home_page)
+		self.assertEqual(response.status_code, 200)
 
 
 	# Когда user переходит по url ('/') то отобразить HttpResponse
@@ -17,7 +17,7 @@ class HomePageTest(TestCase):
 
 		get_html = response.content.decode('utf8')
 
-		self.assertIn('Hello World', get_html)
+		self.assertIn('<title>Hello World</title>', get_html)
 
 
 
